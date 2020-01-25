@@ -1,0 +1,27 @@
+#my rules for folders
+assets
+commands
+config
+controllers
+mail
+models
+runtime
+tests
+vagrant
+vendor
+views
+web
+widgets
+.idea
+
+#my rules for files
+/.bowerrc
+/codeception.yml
+/composer.json
+/composer.lock
+/docker-compose.yml
+/LICENSE.md
+/requirements.php
+/vagrantfile
+/yii
+/yii.bat
