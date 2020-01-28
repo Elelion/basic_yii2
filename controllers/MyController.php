@@ -65,4 +65,14 @@ class MyController extends Controller
             'names',
             'id'));
     }
+
+    /*
+     NOTE:
+     создаем контроллер где более 1го слова в названии
+     обращаемся по такому адресу: .../web/?r=my/blog-post
+     * */
+    public function actionBlogPost()
+    {
+        return 'Blog Post';
+    }
 }
