@@ -1,5 +1,4 @@
 #my rules for folders
-assets
 commands
 config
 
@@ -23,7 +22,14 @@ views/site/login.php
 
 #--
 
-web
+web/assets
+web/css/site.css
+web/.htaccess
+web/favicon.ico
+web/index-test.php
+web/robots.txt
+
+#--
 widgets
 .idea
 
