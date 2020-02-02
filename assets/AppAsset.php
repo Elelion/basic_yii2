@@ -10,6 +10,7 @@
 namespace app\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * Main application asset bundle.
@@ -30,8 +31,14 @@ class AppAsset extends AssetBundle
 
     // NOTE: подключаем здесь наш JavaScript файлик из .../web/js/scripts.js
     public $js = [
-        'js/scripts.js'
+//        'js/scripts.js'
     ];
+
+    // NOTE: меняем расположение нашего скрипта с футера на хедер (см. спеку)
+    public $jsOptions = [
+//        'position' => View::POS_HEAD
+    ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
