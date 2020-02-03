@@ -20,3 +20,8 @@ NOTE: registerJsFile
 а только потом, будет выполнен наш JQ скрипт, но в последних версиях yii2,
 это уже сделано по умолчанию...
 -->
+
+<!--
+NOTE: ajax scripts, look there:
+https://www.yiiframework.com/wiki/665/overcoming-removal-of-client-helpers-e-g-ajaxlink-and-clientscript-in-yii-2-0
+-->
