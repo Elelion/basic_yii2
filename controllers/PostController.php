@@ -64,6 +64,25 @@ class PostController extends AppController
         // FIXME: задать шаблон ТОЛЬО для текущего метода
         // $this->layout = 'basic';
 
+        // NOTE: задаем метатеги для view
+        $this->view->title = 'Одна статья';
+
+        /*
+         * NOTE:
+         * для того что бы сформировать метатеги используется (keyword, desc,
+         * title и.т.п.) используется специальный метод registerMetaTag()
+         * объекта view. В самом же view для вывода метатегов не чего
+         * прописывать не нужно
+         * */
+        $this->view->registerMetaTag([
+            'name' => 'keywords', 'content' => 'ключевики...'
+        ]);
+        $this->view->registerMetaTag([
+            'name' => 'description', 'content' => 'описание страници...',
+        ]);
+
+        // TODO: 6.25
+
         return $this->render('show');
     }
 }
