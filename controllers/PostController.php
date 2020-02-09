@@ -11,6 +11,9 @@ namespace app\controllers;
 use phpDocumentor\Reflection\Types\Parent_;
 use Yii;
 
+// NOTE: подключаем нашу модель
+use app\models\TestForm;
+
 class PostController extends AppController
 {
     // FIXME: задаем шаблон ТОЛЬКО для текущего контроллера и для всех его методов
@@ -41,6 +44,9 @@ class PostController extends AppController
             return 'test';
         }
 
+        // NOTE: создаем объект нашей модели
+        $model = new TestForm();
+
         $names = [
             'Ivanov',
             'Petrov',
@@ -48,7 +54,9 @@ class PostController extends AppController
         ];
 
 //        $this->debug(Yii::$app);
-        return $this->render('test');
+
+        // NOTE: передаем объект нашей модели compact('model')
+        return $this->render('test', compact('model'));
     }
 
     // NOTE: создаем action где более 1го слова в названии
@@ -61,7 +69,7 @@ class PostController extends AppController
     // NOTE: будет выводить одну выбранную статью
     public function actionShow()
     {
-        // FIXME: задать шаблон ТОЛЬО для текущего метода
+        // NOTE: задать шаблон ТОЛЬО для текущего метода
         // $this->layout = 'basic';
 
         // NOTE: задаем метатеги для view
@@ -80,8 +88,6 @@ class PostController extends AppController
         $this->view->registerMetaTag([
             'name' => 'description', 'content' => 'описание страници...',
         ]);
-
-        // TODO: 6.25
 
         return $this->render('show');
     }
