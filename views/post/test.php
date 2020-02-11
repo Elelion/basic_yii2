@@ -24,10 +24,10 @@ use yii\helpers\Html;
 
 <!-- NOTE: создаем форму, импользуя ActiveForm & ActiveField -->
 <?php $form = ActiveForm::begin(['options' => ['id' => 'testForm']]) ?>
-<?= $form->field($model, 'name')->label('Имя') ?>
+<?= $form->field($model, 'name')->label('Имя (from View)') ?>
 <?= $form->field($model, 'email')->input('email') ?>
 <?= $form->field($model, 'text')
-        ->label('Текст сообщения')
+        ->label('Текст сообщения (from View)')
         ->textarea(['rows' => 10]) ?>
 
 <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
