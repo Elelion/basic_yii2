@@ -21,6 +21,35 @@ use yii\helpers\Html;
 //debug(Yii::$app);
 //debug($model);
 ?>
+<div class="alert alert-primary" role="alert">
+  A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+
+<?php
+/*
+ * NOTE:
+ * hasFlash(key) - проверяет есть ли указанный флеш (сессия)
+ * getFlash(key) - возвращает значение из флеша(сессии) по указанному ключу
+ */
+if (Yii::$app->session->hasFlash('success')): ?>
+  <!-- NOTE: вставляем код из спеки бутстрапа -->
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <?= Yii::$app->session->getFlash('success'); ?>
+  </div>
+<?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash('error')): ?>
+  <!-- NOTE: bootstrap layout -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <?= Yii::$app->session->getFlash('error'); ?>
+  </div>
+<?php endif; ?>
 
 <!-- NOTE: создаем форму, импользуя ActiveForm & ActiveField -->
 <?php $form = ActiveForm::begin(['options' => ['id' => 'testForm']]) ?>
