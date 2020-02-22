@@ -1,6 +1,13 @@
 #my rules for folders
 commands
-config
+
+#--
+
+config/console.php
+config/params.php
+config/test.php
+config/test_db.php
+config/web.php
 
 #--
 
