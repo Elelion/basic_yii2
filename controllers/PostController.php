@@ -8,6 +8,7 @@ AppController
 namespace app\controllers;
 
 // NOTE: use yii\web\Controller; - не нужно т.к. контроллеры находятся рядом
+use app\models\Category;
 use phpDocumentor\Reflection\Types\Parent_;
 use Yii;
 
@@ -100,7 +101,10 @@ class PostController extends AppController
             'name' => 'description', 'content' => 'описание страници...',
         ]);
 
-        return $this->render('show');
+        // SELECT * FROM Category
+        $cats = Category::find()->all();
+
+        return $this->render('show', compact('cats'));
     }
 }
 
