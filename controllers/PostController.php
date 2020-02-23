@@ -102,7 +102,80 @@ class PostController extends AppController
         ]);
 
         // SELECT * FROM Category
-        $cats = Category::find()->all();
+        //$cats = Category::find()->all();
+
+        // SELECT * FROM Category ORDER BY - обратная сортировка
+        //$cats = Category::find()->orderBy(['id' => SORT_DESC])->all();
+
+        // Вытаскивает данные из модели(таблици) в виде массива
+        //$cats = Category::find()->asArray()->all();
+        //debug($cats);
+        //die();
+
+        //$cats = Category::find()->asArray()->where('parent = 691')->all();
+        //debug($cats);
+        //die();
+
+        // SELECT * FROM Category WHERE parent = 691
+        //$cats = Category::find()->where(['parent' => 691])->all();
+
+        // SELECT * FROM `categories` WHERE `title` LIKE '%pp%'
+        //$cats = Category::find()->where(['like', 'title', 'pp'])->all();
+
+        // SELECT * FROM `categories` WHERE `id` <= 3
+        //$cats = Category::find()->where(['<=', 'id', 3])->all();
+
+        // SELECT * FROM `categories` WHERE parent = 691 LIMIT 1
+        //$cats = Category::find()->where('parent = 691')->limit(1)->all();
+
+        /*
+         * NOTE:
+         * SELECT * FROM `categories` WHERE parent = 691
+         * но данный метод вернет лишь 1ну запись, из за ->one();
+         * */
+        //$cats = Category::find()->where('parent = 691')->one();
+        //echo $cats->title;
+        //die();
+
+        // SELECT COUNT(*) FROM `categories` WHERE parent = 691
+        //$cats = Category::find()->where('parent = 691')->count();
+        //echo $cats;
+        //die();
+
+        /*
+         * NOTE:
+         * Возвращает объект, из которого НЕльзя сделать обхект т.е. если мы
+         * допишем ->AsArray(), то получим ошибку, так же как и если мы
+         * допишем ->Limit(1).
+         * */
+        //$cats = Category::findOne(['parent' => 691]);
+        //debug($cats); die();
+
+        /*
+         * NOTE:
+         * SHOW FULL COLUMNS FROM `categories`
+         * SELECT * FROM `categories` WHERE `parent`=691
+         * */
+        //$cats = Category::findAll(['parent' => 691]);
+
+        /*
+         * NOTE:
+         * Если возникнет надобность использовать более сложный SQL запрос,
+         * то мы можем написать его на ванильном SQL и передать
+         * его в ActiveRecord
+         * */
+        //$query = "SELECT * FROM categories WHERE title LIKE '%pp%'";
+        //$cats = Category::findBySql($query)->all();
+
+        /*
+         * NOTE:
+         * делаем парамитизированный запрос, как правило такие запросы нужны
+         * для того, что бы предотвратить различные SQL инхекции и.т.п.
+         * как правило подобные инхекции вводятся в поля, которые заполняет
+         * пользователь
+         * */
+        $query = "SELECT * FROM categories WHERE title LIKE :search";
+        $cats = Category::findBySql($query, [':search' => '%pp%'])->all();
 
         return $this->render('show', compact('cats'));
     }
