@@ -20,7 +20,14 @@ NOTE:
 <h1>Show Action Content</h1>
 
 <!-- NOTE: выводим дамп нашей таблици -->
-<?= debug($cats); ?>
+<?//= debug($cats); ?>
+
+<?php
+  // NOTE: выводим все заголовки таблици
+  foreach ($cats as $cat) {
+    echo $cat->title . '<br>';
+  }
+?>
 
 <?php
   // NOTE: подключаем JS скрипт, только на данной странице
