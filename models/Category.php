@@ -18,4 +18,14 @@ class Category extends ActiveRecord
         // NOTE: указываем наше имя таблици
         return 'categories';
     }
+
+    public function getProducts()
+    {
+        /*
+         * NOTE:
+         * связь один ко многим, принимает имя класса и массив
+         *  hasMany - т.к. к одной категории может относиться несколько продуктов
+         * */
+        return $this->hasMany(Product::className(), ['parent' => 'id']);
+    }
 }
