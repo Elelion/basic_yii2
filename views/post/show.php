@@ -23,10 +23,38 @@ NOTE:
 <?//= debug($cats); ?>
 
 <?php
-  // NOTE: выводим все заголовки таблици
-  foreach ($cats as $cat) {
-    echo $cat->title . '<br>';
-  }
+    foreach ($cats as $cat) {
+        echo '<ul>';
+            echo '<li>' . $cat->title . '</li>';
+
+            // NOTE: применяем отложенную загрузку
+            $products = $cat->products;
+            foreach ($products as $product) {
+                echo '<ul>';
+                    echo '<li>' . $product->title . '</li>';
+                echo '</ul>';
+            }
+        echo '</ul>';
+    }
+
+    //echo $cats->title;
+?>
+
+<?php
+  /*
+   * NOTE:
+   * Данный вид связи называется ленивой загрузкой, и аналогично
+   * SELECT * FROM `products` WHERE `parent`=3
+   * и выполнится он только на момент $cats->products
+   * т.е. если бы мы НЕ выполнили $cats->products, то и наш запрос бы
+   * не выполнился то же
+   * */
+    //echo '<br>' . count($cats->products);
+?>
+
+<?php
+    // NOTE: для $cats = Category::find()->where('id = 3')->all();
+    //echo '<br>' . count($cats[0]->products);
 ?>
 
 <?php
