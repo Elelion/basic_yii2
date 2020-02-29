@@ -4,19 +4,35 @@
 
 namespace app\models;
 
-use yii\base\Model;
+/*
+ * NOTE:
+ * что бы yii2 за нас дописал закомментированные св-ва, нужен ActiveRecord
+ * а модель мы убираем
+ * */
 
-class TestForm extends Model
+use yii\db\ActiveRecord;
+//use yii\base\Model;
+
+/*
+ * NOTE:
+ * соответственно мы убираем расширение от Модели, и будем расширять данный
+ * класс ActiveRecord
+ * */
+
+//class TestForm extends Model
+class TestForm extends ActiveRecord
 {
-    public $name;
-    public $email;
-    public $text;
+    public static function tableName()
+    {
+        // NOTE: указываем наше имя таблици
+        return 'posts';
+    }
 
-    /*
-     * NOTE:
-     * возвращает массив где ключами будут наши атрибуты name, email, text
-     * а значениями будут названия для label'ов, которые мы хотим видить
-     * */
+    // NOTE: убираем, т.к. за нас теперь это будет делать ActiveRecord
+    //public $name;
+    //public $email;
+    //public $text;
+
     public function attributeLabels()
     {
         return [
@@ -26,59 +42,26 @@ class TestForm extends Model
         ];
     }
 
-    // NOTE: как правило rules - ф-ция по умолчанию, которая задает валидацию
     public function rules()
     {
         return [
-            [['name', 'email'], 'required'],
+            [['name', 'text'], 'required'],
             ['email', 'email'],
 
-            // ['name', 'string', 'min' => 2, 'tooShort' => 'Слишком коротко'],
-            // ['name', 'string', 'max' => 5, 'tooLong' => 'Слишком длинно']
-            ['name', 'string', 'length' => [2, 5]],
-            ['name', 'myRule'],
+            // NOTE: закоментированные поля, объявит за нас yii2
+             ['name', 'string', 'min' => 2, 'tooShort' => 'Слишком коротко'],
+             ['name', 'string', 'max' => 5, 'tooLong' => 'Слишком длинно'],
+            //['name', 'string', 'length' => [2, 5]],
+            //['name', 'myRule'],
             ['text', 'trim']
         ];
     }
 
     // NOTE: пишем свое правило валидации, но оно backend'овое
-    public function myRule($attr)
-    {
-        if (!in_array($this->$attr, ['hello', 'world'])) {
-            $this->addError($attr, 'Wrong!');
-        }
-    }
+    //public function myRule($attr)
+    //{
+    //    if (!in_array($this->$attr, ['hello', 'world'])) {
+    //        $this->addError($attr, 'Wrong!');
+    //    }
+    //}
 }
-
-/*
-NOTE:
-По сути метод attributeLabels задает label's для соответствующих полей
-НО а атрибут в ActiveForm ...->label('Имя') имеет более высокий приоритет
-и по этому будет 'затирать' наш метод attributeLabels.
-*/
-
-/*
-NOTE:
-message - позволяет задать текст сообщения для большинства валидаторов
-Например:
-[['name', 'email'], 'required', 'message' => 'Поле обязательно']
-
-А так мы можем задать минимальную длинну поля:
-['name', 'string', 'min' => 2]
-
-А так мы задаем текст ошибки при минимальной или максимальной длинне
-'tooShort' => 'Слишком коротко' / 'tooLong' => 'Слишком длинно'
-для min / max
-
-А так мы обрезаем пробелы в начале и в конце строки
-['text', 'trim']
-
-А так мы разрешаем любые данные в поле, даже если оно будет пустым
-['text', 'safe']
-*/
-
-/*
-NOTE:
-Если мы не укажем какие либо значения в rules, то эти данные не будут
-загруженны в модель
-*/
