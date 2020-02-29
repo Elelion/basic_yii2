@@ -4,20 +4,8 @@
 
 namespace app\models;
 
-/*
- * NOTE:
- * что бы yii2 за нас дописал закомментированные св-ва, нужен ActiveRecord
- * а модель мы убираем
- * */
-
 use yii\db\ActiveRecord;
 //use yii\base\Model;
-
-/*
- * NOTE:
- * соответственно мы убираем расширение от Модели, и будем расширять данный
- * класс ActiveRecord
- * */
 
 //class TestForm extends Model
 class TestForm extends ActiveRecord
