@@ -101,6 +101,7 @@ class PostController extends AppController
             'name' => 'description', 'content' => 'описание страници...',
         ]);
 
+        // NOTE: ленивая загрузка
         // SELECT * FROM Category
         //$cats = Category::find()->all();
 
@@ -174,8 +175,27 @@ class PostController extends AppController
          * как правило подобные инхекции вводятся в поля, которые заполняет
          * пользователь
          * */
-        $query = "SELECT * FROM categories WHERE title LIKE :search";
-        $cats = Category::findBySql($query, [':search' => '%pp%'])->all();
+        //$query = "SELECT * FROM categories WHERE title LIKE :search";
+        //$cats = Category::findBySql($query, [':search' => '%pp%'])->all();
+
+        // NOTE: делаем обычный запрос, для демонстрации ленивой загрузки
+        //$cats = Category::findOne(3);
+
+        // NOTE: запрос для отложенной загрузки, которая жадно все забираем из БД
+        //$cats = Category::find()->where('id = 3')->all();
+
+        // NOTE: а вот жадная загрузка, т.е. мы объеденяем запрос с products
+        //$cats = Category::find()->with('products')->where('id = 3')->all();
+
+        /*
+         * NOTE:
+         * Для того что бы наш запрос ленивой загрузки
+         * $cats = Category::find()->all();
+         * стал "жадной загрузкой" нам нужно всего лишь добавить искомый запрос
+         * ->with('products') , тем самым мы уменьшим кол-во запросов к БД
+         * с 17 до 4
+         * */
+        $cats = Category::find()->with('products')->all();
 
         return $this->render('show', compact('cats'));
     }
@@ -186,4 +206,12 @@ NOTE:
 Флеш сообщения - это сообщения которые записываются в сессию, но не остаются
 там, а являются как бы одноразывыми. Т.е. сразу же после того как мы их
 запросили они, будут удалены из сессии
+*/
+
+/*
+NOTE:
+Когда использовать ленивую загрузку, а когда жадную?
+Если у нас НЕ много объектов (2 - 3) то тогда мы должны использовать отложенную
+загрузку (ленивую).
+Если объектов много и много связей, то нужно использовать жадную загрузку.
 */
