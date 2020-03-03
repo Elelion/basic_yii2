@@ -1,0 +1,5 @@
+/* NOTE: пишем свои стили и подключаем их в .../assets/AppAsset.php */
+
+body {
+  background: #cccccc;
+}
