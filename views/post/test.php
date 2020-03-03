@@ -31,6 +31,10 @@ if (Yii::$app->session->hasFlash('success')): ?>
 <?php $form = ActiveForm::begin(['options' => ['id' => 'testForm']]) ?>
 <?= $form->field($model, 'name')->label('Имя (from View)') ?>
 <?= $form->field($model, 'email')->input('email') ?>
+
+<!-- NOTE: вставляем наше расширение -->
+<?= yii\jui\DatePicker::widget(['name' => 'attributeName']) ?>
+
 <?= $form->field($model, 'text')
         ->label('Текст сообщения (from View)')
         ->textarea(['rows' => 10]) ?>
@@ -38,3 +42,33 @@ if (Yii::$app->session->hasFlash('success')): ?>
 <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
 
 <?php ActiveForm::end() ?>
+
+
+<?php
+/*
+NOTE:
+https://www.yiiframework.com/extension/yiisoft/yii2-jui
+от сюда мы можем скачивать любое нужное нам расширение под конкретные задачи.
+
+Установка в автоматическом режиме более простая, нежели установка расширения
+в ручную. И если есть возможность установки через консоль, нужно устанавливать
+именно через нее.
+
+Например ищем расширение
+JUI Extension for Yii 2 - JQ календарик
+
+А в описании копируем его установку , далее переходим в нашу корневую папку
+проекта, и устанавливаем через композер
+php composer.phar require --prefer-dist yiisoft/yii2-jui
+
+но будет ошибка, т.к. нужно удалить лишнее...
+composer require --prefer-dist yiisoft/yii2-jui
+
+WARNING! если будет ошибка git API - нужно просто авторизоваться в гит хабе...
+
+для использования расширения копируем код из USAGE
+<?= yii\jui\DatePicker::widget(['name' => 'attributeName']) ?>
+
+Язык календаря будет таким, какой язык мы установили в config/web.php->language
+*/
+?>
