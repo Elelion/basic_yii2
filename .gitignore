@@ -40,7 +40,6 @@ views/site/login.php
 
 web/assets
 web/css/site.css
-web/.htaccess
 web/favicon.ico
 web/index-test.php
 web/robots.txt
