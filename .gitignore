@@ -28,8 +28,6 @@ vendor
 
 #--
 
-views/layouts/main.php
-
 views/site/about.php
 views/site/contact.php
 views/site/error.php
