@@ -26,6 +26,8 @@ class AppAsset extends AssetBundle
     // NOTE: подключаем здесь наш CSS файлик из .../web/css/style.js
     public $css = [
         'css/site.css',
+
+        // NOTE: пишем свои стили и подключаем их
         'css/style.css',
     ];
 
@@ -42,7 +44,7 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'grozzzny\depends\bootstrap4\Bootstrap4Asset',
-        'grozzzny\depends\bootstrap4\Bootstrap4PluginAsset',
+        //'grozzzny\depends\bootstrap4\Bootstrap4Asset',
+        //'grozzzny\depends\bootstrap4\Bootstrap4PluginAsset',
     ];
 }
