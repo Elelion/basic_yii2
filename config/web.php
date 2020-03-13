@@ -121,6 +121,7 @@ $config = [
     'params' => $params,
 ];
 
+// NOTE: здесь подключается наш Gii
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
@@ -133,8 +134,12 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        /*
+         * NOTE:
+         * добавляем нужный нам ip адрес, и доступ к Gii с этого ip адреса
+         * будет запрещен
+         * */
+        //'allowedIPs' => ['127.0.0.52'],
     ];
 }
 
